@@ -11,9 +11,9 @@ import model.Categoria;
  */
 public interface CarroDAO {
 
-    final String INSERT_CARRO = "INSERT INTO Carro(idCarro, nome, placa, marca, ano, kmAtual, " +
-        "statusPatrimonio, statusLocacao, numeroMaximoDiasLocacao, QRCode, idCategoria)" +
-        " VALUES(?, ?, ?, ?, ? , ?, ?, ?, ?, ?, ?)";
+    final String INSERT_CARRO = "INSERT INTO Carro(placa, nome, ano, quilometragem, " +
+        "patrimonio, status, maxDiasLocacao, marca, qrCode, Categoria_idCategoria)" +
+        " VALUES(?, ?, ?, ?, ? , ?, ?, ?, ?, ?)";
 
     public boolean save(Carro carro);
 

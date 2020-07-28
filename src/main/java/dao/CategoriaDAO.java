@@ -11,8 +11,8 @@ import model.Categoria;
  */
 public interface CategoriaDAO {
 
-    final String INSERT_CATEGORIA = "INSERT INTO Categoria(idCategoria, descricaoCategoria, precoDiario) " +
-        "VALUES(?, ?, ?)";
+    final String INSERT_CATEGORIA = "INSERT INTO Categoria(idCategoria, nome, descricao, precoDiario) " +
+        "VALUES(?, ?, ?, ?)";
 
     public boolean save(Categoria categoria);
 

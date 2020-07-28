@@ -31,50 +31,24 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 
         if (con != null) {
             try {
-                /*
-                 * Setando a conexão para falso, que representa o start da transação
-                 */
+
                 con.setAutoCommit(false);
 
-                /*
-                 * Essa instrução recebe o comando SQL (INSERT_PESSOA) e uma flag
-                 * (PreparedStatement.RETURN_GENERATED_KEYS) que determina que a chave
-                 * da entidade perisistida deve ser retornada
-                 */
                 pstm = con.prepareStatement(INSERT_CATEGORIA, PreparedStatement.RETURN_GENERATED_KEYS);
 
-                /*
-                 * O valor do objeto fisica é atribuído ao primeiro parâmetro do comando SQL
-                 */
-                pstm.setInt(1, categoria.getIdCategoria());
-
-                /*
-                 * Esse comando executa a instrução SQL
-                 */
-                pstm.executeUpdate();
-
-                /*
-                 * Esse comando retorna um objeto do tipo ResultSet contendo a chave gerada.
-                 */
                 res = pstm.getGeneratedKeys();
 
-                /**
-                 * Recuperação da chave gerada
-                 */
                 while (res.next()) {
                     idCategoria = res.getLong(1);
                 }
 
-                /*
-                 * O trecho abaixo permite a inserção de uma classe Fisica na tabela Fisica
-                 */
                 pstm = con.prepareStatement(INSERT_CATEGORIA);
-                pstm.setInt(1, categoria.getIdCategoria());
+                pstm.setInt(1, (int) idCategoria);
+                pstm.setString(2, categoria.getNome());
+                pstm.setString(3, categoria.getDescricaoCategoria());
+                pstm.setFloat(4, categoria.getPrecoDiario());
                 pstm.executeUpdate();
 
-                /*
-                 * Executando o commit da transação.
-                 */
                 con.commit();
                 b = true;
             } catch (SQLException ex) {

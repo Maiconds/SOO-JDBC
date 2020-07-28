@@ -16,4 +16,7 @@ public class ServiceFactory {
         return new CarroServiceImpl();
     }
 
+    public static CategoriaService getCategoriaService(){
+        return new CategoriaServiceImpl();
+    }
 }

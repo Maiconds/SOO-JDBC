@@ -14,4 +14,7 @@ public class DaoFactory {
     public static CarroDAO getCarroDAO(){
         return new CarroDAOImpl();
     }
+    public static CategoriaDAO getCategoriaDAO(){
+        return new CategoriaDAOImpl();
+    }
 }

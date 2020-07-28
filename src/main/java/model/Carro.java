@@ -8,7 +8,6 @@ package model;
  */
 public class Carro {
 
-    public int idCarro;
     public String nome;
     public String placa;
     public String marca;
@@ -19,10 +18,6 @@ public class Carro {
     public int numeroMaximoDiasLocacao;
     public String QRCode;
     Categoria idCategoria;
-
-    public void setIdCarro(int idCarro) {
-        this.idCarro = idCarro;
-    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -62,10 +57,6 @@ public class Carro {
 
     public void setIdCategoria(Categoria idCategoria) {
         this.idCategoria = idCategoria;
-    }
-
-    public int getIdCarro() {
-        return idCarro;
     }
 
     public String getNome() {
@@ -111,8 +102,7 @@ public class Carro {
     @Override
     public String toString() {
         return "Carro{" +
-            "idCarro=" + idCarro +
-            ", nome='" + nome + '\'' +
+            "nome='" + nome + '\'' +
             ", placa='" + placa + '\'' +
             ", marca='" + marca + '\'' +
             ", ano=" + ano +
