@@ -20,5 +20,5 @@ public interface CategoriaDAO {
         + "FROM Categoria "
         + "WHERE idCategoria = ?";
 
-    public Categoria findByCpf(int idCategoria);
+    public Categoria findByIdCategoria(int idCategoria);
 }

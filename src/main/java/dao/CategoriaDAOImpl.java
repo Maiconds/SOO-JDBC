@@ -69,25 +69,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
                  * O trecho abaixo permite a inserção de uma classe Fisica na tabela Fisica
                  */
                 pstm = con.prepareStatement(INSERT_CATEGORIA);
-                pstm.setString(1, fisica.getCpf());
-                pstm.setDate(2, new java.sql.Date(fisica.getDataNascimento().getTime()));
-                pstm.setLong(3, idPessoa);
+                pstm.setInt(1, categoria.getIdCategoria());
                 pstm.executeUpdate();
-
-                /*
-                 * Abaixo segue as chamadas das outras classes DAO para persistência das
-                 * outras classes em entidade no banco de dados.
-                 */
-                AcessoDAO adao = new AcessoDAOImpl();
-                adao.save(con, fisica.getAcesso(), idPessoa);
-
-                ContatoDAO cdao = new ContatoDAOImpl();
-                cdao.save(con, fisica.getContato(), idPessoa);
-
-                EnderecoDAO edao = new EnderecoDAOImpl();
-                for (Endereco e : fisica.getEndereco()) {
-                    edao.save(con, e, idPessoa);
-                }
 
                 /*
                  * Executando o commit da transação.
@@ -103,27 +86,28 @@ public class CategoriaDAOImpl implements CategoriaDAO {
     }
 
     @Override
-    public Categoria findByCpf(int cpf) {
+    public Categoria findByIdCategoria(int idCategoria) {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet res = null;
-        Fisica fisica = null;
+        Categoria categoria = null;
 
         con = FabricaConexao.getConexao();
 
         if (con != null) {
             try {
-                pstm = con.prepareStatement(FIND_BY_CPF);
-                pstm.setString(1, cpf);
+                pstm = con.prepareStatement(FIND_BY_ID);
+                pstm.setInt(1, idCategoria);
                 res = pstm.executeQuery();
 
                 /**
                  * Recuperação o objeto
                  */
                 while (res.next()) {
-                    fisica = new Fisica();
-                    fisica.setIdPessoa(res.getLong(1));
-                    fisica.setNome(res.getString(2));
+                    categoria = new Categoria();
+                    categoria.setDescricaoCategoria(res.getString(1));
+                    categoria.setIdCategoria(res.getInt(2));
+                    categoria.setPrecoDiario(res.getFloat(3));
                 }
             } catch (SQLException ex) {
                 System.out.println("Message: " + ex);
@@ -132,5 +116,4 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 
         return categoria;
     }
-
 }

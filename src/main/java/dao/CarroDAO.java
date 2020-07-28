@@ -1,6 +1,7 @@
 package dao;
 
 import model.Carro;
+import model.Categoria;
 
 /**
  * @author Grupo 2
@@ -16,4 +17,9 @@ public interface CarroDAO {
 
     public boolean save(Carro carro);
 
+    final String FIND_BY_ID_CARRO = "SELECT idCategoria"
+        + "FROM Categoria "
+        + "WHERE idCategoria = ?";
+
+    public Carro findByIdCarro(int idCarro);
 }
